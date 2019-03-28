@@ -87,7 +87,7 @@ include ("${CMAKE_CURRENT_SOURCE_DIR}/cmake/utils.cmake")
 # ----------------------------------------------------------------------------
 # package information
 set (PACKAGE_NAME        "gflags")
-set (PACKAGE_VERSION     "2.2.1")
+set (PACKAGE_VERSION     "2.2.2")
 set (PACKAGE_STRING      "${PACKAGE_NAME} ${PACKAGE_VERSION}")
 set (PACKAGE_TARNAME     "${PACKAGE_NAME}-${PACKAGE_VERSION}")
 set (PACKAGE_BUGREPORT   "https://github.com/gflags/gflags/issues")
@@ -568,11 +568,10 @@ if (INSTALL_HEADERS)
   if (UNIX)
     install (PROGRAMS src/gflags_completions.sh DESTINATION ${RUNTIME_INSTALL_DIR})
   endif ()
-endif ()
-
-if (PKGCONFIG_INSTALL_DIR)
-  configure_file ("cmake/package.pc.in" "${PROJECT_BINARY_DIR}/${PACKAGE_NAME}.pc" @ONLY)
-  install (FILES "${PROJECT_BINARY_DIR}/${PACKAGE_NAME}.pc" DESTINATION "${PKGCONFIG_INSTALL_DIR}")
+  if (PKGCONFIG_INSTALL_DIR)
+    configure_file ("cmake/package.pc.in" "${PROJECT_BINARY_DIR}/${PACKAGE_NAME}.pc" @ONLY)
+    install (FILES "${PROJECT_BINARY_DIR}/${PACKAGE_NAME}.pc" DESTINATION "${PKGCONFIG_INSTALL_DIR}")
+  endif ()
 endif ()
 
 # ----------------------------------------------------------------------------
